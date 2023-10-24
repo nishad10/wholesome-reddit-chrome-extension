@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
+import { SubRedditListContext } from '../SubredditListContext';
+import { Wrapper, List } from './PopupStyled';
 
 const Popup = () => {
+  const [state, dispatch] = useContext(SubRedditListContext);
+  const [checked, setChecked] = useState(state.subredditListCHECKED);
+  const handleCheck = (event) => {
+    var updatedList = [...checked];
+    if (event.target.checked) {
+      updatedList = [...checked, event.target.value];
+    } else {
+      updatedList.splice(checked.indexOf(event.target.value), 1);
+    }
+    setChecked(updatedList);
+  };
+  useEffect(() => {
+    dispatch({
+      type: 'SET_LIST',
+      payload: { id: Math.random() * 1000, checked },
+    });
+  }, [checked, dispatch]);
+  console.log(state);
   return (
-    <div className="App">
+    <Wrapper className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
+        <div className="title">Your CheckList:</div>
+        <List className="list-container">
+          {state.subredditListDEFAULT?.map((item, index) => (
+            <div key={index}>
+              <input
+                value={item}
+                type="checkbox"
+                checked={checked.indexOf(item) !== -1}
+                onChange={handleCheck}
+              />
+              {item}
+            </div>
+          ))}
+        </List>
       </header>
-    </div>
+    </Wrapper>
   );
 };
 

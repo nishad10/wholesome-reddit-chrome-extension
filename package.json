@@ -1,11 +1,11 @@
 {
-  "name": "chrome-extension-boilerplate-react",
+  "name": "wholesome-reddit-chrome-background-extension",
   "version": "5.0.4",
-  "description": "A chrome extension boilerplate built with React 18, Webpack 5, and Webpack Dev Server 4",
-  "license": "MIT",
+  "description": "Wholesome Reddit content as background for google chrome new tabs.",
+  "license": "LGPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
+    "url": "https://github.com/nishad10/wholesome-reddit-chrome-extension.git"
   },
   "scripts": {
     "build": "node utils/build.js",
@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "antd": "^4.5.4",
+    "axios": "^0.19.2",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
